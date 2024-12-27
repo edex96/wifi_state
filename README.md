@@ -1,6 +1,6 @@
 ### wifi_state
 
-`It is used to check if wifi is on or off, on Android.`
+`It is used to check wifi status, enable wifi, or open wifi settings on Android.`
 
 Before Android Q directly enables wifi<br>
 After Android Q launches wifi settings
