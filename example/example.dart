@@ -12,7 +12,7 @@ class Example extends StatefulWidget {
 class _ExampleState extends State<Example> with WidgetsBindingObserver {
   bool? isWifiOn;
 
-  fetchWifiState() {
+  void fetchWifiState() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       isWifiOn = await WifiState.isOn();
       if (mounted) {
@@ -25,21 +25,16 @@ class _ExampleState extends State<Example> with WidgetsBindingObserver {
     return Switch(
       value: isWifiOn!,
       activeTrackColor: Colors.green,
-      thumbIcon: WidgetStateProperty.resolveWith(
-        (a) {
-          return isWifiOn! ? Icon(Icons.wifi) : Icon(Icons.wifi_off);
-        },
-      ),
+      thumbIcon: WidgetStateProperty.resolveWith((a) {
+        return isWifiOn! ? Icon(Icons.wifi) : Icon(Icons.wifi_off);
+      }),
       onChanged: (val) async {
         if (!isWifiOn!) {
           /// Before Android Q directly enables wifi
           /// After Android Q launches wifi settings
           await WifiState.open();
         } else {
-          snack(
-            context,
-            'You can close in the settings.',
-          );
+          snack(context, 'You can close in the settings.');
         }
       },
     );
